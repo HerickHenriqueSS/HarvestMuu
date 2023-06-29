@@ -1,0 +1,161 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "#geral": {
+            "scaleInDock": 1
+        },
+        "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/Sala-de-Aula.tmx": {
+            "scale": 1.9791666666666667,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.74736842105267,
+                "y": 215.74736842105264
+            }
+        },
+        "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/Sala-de-Aula.tmx#tiles_office": {
+            "scaleInDock": 1
+        },
+        "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/mapas.tmx": {
+            "scale": 2.1374999999999997,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.29824561403512,
+                "y": 199.2982456140351
+            }
+        },
+        "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/mapas.tmx#tiles_floors": {
+            "scaleInDock": 1
+        },
+        "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/mapas.tmx#tiles_store": {
+            "scaleInDock": 1
+        },
+        "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/mapas.tmx#tiles_walls": {
+            "scaleInDock": 1
+        },
+        "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/Sala-de-Aula.tmx": {
+            "scale": 1.9791666666666667,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.74736842105267,
+                "y": 215.74736842105264
+            }
+        },
+        "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/Sala-de-Aula.tmx#tiles_office": {
+            "scaleInDock": 1
+        },
+        "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/mapas.tmx": {
+            "scale": 2.1374999999999997,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.29824561403512,
+                "y": 199.2982456140351
+            }
+        },
+        "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/mapas.tmx#tiles_floors": {
+            "scaleInDock": 1
+        },
+        "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/mapas.tmx#tiles_store": {
+            "scaleInDock": 1
+        },
+        "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/mapas.tmx#tiles_walls": {
+            "scaleInDock": 1
+        },
+        "farmMap.json": {
+            "expandedObjectLayers": [
+                8
+            ],
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 195.33333333333337,
+                "y": 245.33333333333326
+            }
+        },
+        "farmMap.json#geral": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "farmMap.tmx": {
+            "scale": 1.4629999999999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.25974025974034,
+                "y": 198.2228298017772
+            }
+        },
+        "farmMap.tmx#geral": {
+            "scaleInDock": 1
+        },
+        "farmMap2.json": {
+            "scale": 2.0801041666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.17071460764183,
+                "y": 199.02849416595723
+            }
+        },
+        "farmMap2.json#geral": {
+            "scaleInDock": 1
+        },
+        "houseMap.json": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 226.66666666666663,
+                "y": 254.66666666666663
+            }
+        },
+        "houseMap.json#geral": {
+            "scaleInDock": 1
+        },
+        "houseMap2.json": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 199,
+                "y": 131
+            }
+        },
+        "houseMap2.json#geral": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "D:/Jogos Digitais/HarvestMuu/public/assets/mapas",
+    "last.imagePath": "D:/Jogos Digitais/HarvestMuu/public/assets/tiles/fazenda",
+    "map.height": 25,
+    "map.lastUsedExportFilter": "Ficheiros de mapa JSON (*.tmj *.json)",
+    "map.lastUsedFormat": "json",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+    ],
+    "project": "mapfarm.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "farmMap.json",
+        "farmMap2.json",
+        "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/Sala-de-Aula.tmx",
+        "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/mapas.tmx",
+        "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/Sala-de-Aula.tmx",
+        "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/mapas.tmx",
+        "farmMap.tmx",
+        "houseMap2.json",
+        "houseMap.json"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
