@@ -7,14 +7,14 @@ const config = {
   width: CONFIG.GAME_WIDTH,
   height: CONFIG.GAME_HEIGHT,
   type: AUTO,
-  scene: [SceneFarm, SceneHouse],
+  scene: [ SceneFarm, SceneHouse, ],
   physics: {
     default: 'arcade',
     arcade: {
       gravity: {
         y: 0
       },
-      debug: true
+      debug: false
     }
   },
   pixelArt: true,

@@ -17,6 +17,8 @@ export default class SceneHouse extends Scene{
     //** @type {Phaser.Physics.Arcade.Group} */
     groupObjects;
 
+    isTouching = false;
+
     constructor(){
         super('SceneHouse');
     }
@@ -40,10 +42,11 @@ export default class SceneHouse extends Scene{
 
         this.createMap();
         this.createPlayer();
-        // this.createCow();
         this.createLayers();
+        this.createObjects()
         this.createColliders();
         this.createCamera();
+        this.handleTouch();
     }
 
     update(){
@@ -54,13 +57,8 @@ export default class SceneHouse extends Scene{
     createPlayer(){
         this.touch = new Touch(this, 250, 200);
 
-        this.player =  new Player(this, 250, 200, this.touch);
-        this.player.setDepth(2)
-
-    }
-    createCow(){
-        this.cow =  new Cow(this, 270, 200, this.touch);
-        this.cow.setDepth(3)
+        this.player =  new Player(this, 88, 325, this.touch);
+        this.player.setDepth(3)
 
     }
 
@@ -71,8 +69,6 @@ export default class SceneHouse extends Scene{
             tileHeight: CONFIG.TILE_SIZE
         });
 
-        //fazendo a correnpodencia ente as imagens usada no Tiled e as carrregadas peli phaser
-        // addTilesetImage(nome da imagem no Tiled, nome da imagem carregado no Phaser)
         this.map.addTilesetImage('geral', 'tiles-house');
     }
 
@@ -81,7 +77,6 @@ export default class SceneHouse extends Scene{
         const tilesHouse = this.map.getTileset('geral');
 
         const layerNames = this.map.getTileLayerNames();
-        console.log(layerNames)
         for (let i = 0; i < layerNames.length; i++) {
             const name = layerNames[i];
             
@@ -95,7 +90,6 @@ export default class SceneHouse extends Scene{
 
             if(name.endsWith('Collision') ) {
                 this.layers[name].setCollisionByProperty({collide: true});
-                console.log(name)
 
                 /* if ( CONFIG.DEBUG_COLLISION ) {
                     const debugGraphics = this.add.graphics().setAlpha(0.75).setDepth(i);
@@ -113,6 +107,30 @@ export default class SceneHouse extends Scene{
 
     }
 
+    createObjects(){
+
+        this.groupObjects =this.physics.add.group();
+
+        const objects = this.map.createFromObjects('Objects',{
+            nome: 'door'
+        
+        });
+        
+        this.physics.world.enable(objects);
+
+        for ( let i = 0; i <objects.length; i++){
+            const obj = objects[i]
+            const prop = this.map.objects[0].objects[i]
+            
+            obj.setDepth(this.layers.length+1);
+            obj.setVisible(false);
+
+            this.groupObjects.add( obj);
+
+        }
+
+    }
+
     createColliders(){
         const layerNames = this.map.getTileLayerNames();
         for ( let i = 0; i < layerNames.length; i++){
@@ -120,8 +138,6 @@ export default class SceneHouse extends Scene{
 
             if (name.endsWith('Collision')) {
                 this.physics.add.collider(this.player, this.layers[name]);
-                // this.physics.add.collider(this.cow, this.layers[name]);
-                // this.physics.add.collider(this.cowTwo, this.layers[name]);
             }
         }
 
@@ -134,6 +150,14 @@ export default class SceneHouse extends Scene{
 
         this.cameras.main.setBounds(0, 0, mapWidth, mapHeight);
         this.cameras.main.startFollow(this.player)
+    }
+
+    handleTouch(touch, objects){      
+        
+        const { space } = this.cursors;  
+        if(space.isDown && objects.name =='door' && this.isTouching == false){
+            this.scene.switch('SceneFarm');
+        }
     }
 
 }

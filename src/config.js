@@ -5,5 +5,5 @@ export const CONFIG ={
     GAME_WIDTH: 30 * TILE_SIZE,
     GAME_HEIGHT: 25* TILE_SIZE,
     GAME_SCALE: 2,
-    DEBUG_COLLISION: false
+    DEBUG_COLLISION: true
 }

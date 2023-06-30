@@ -133,6 +133,13 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             frameRate: this.frameRate,
             repeat: -1
         });
+        this.anims.create({
+            key: 'idle-space',
+            frames: this.anims.generateFrameNumbers('player', {
+            start: 104, end: 111}),
+            frameRate: this.frameRate,
+            repeat: 0
+        });
 
         //Walking player
         this.anims.create({
@@ -163,6 +170,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             frameRate: this.frameRate,
             repeat: -1
         });
+        
         
     }
 }

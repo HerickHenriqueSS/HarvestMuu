@@ -20,16 +20,22 @@ export default class SceneFarm extends Scene{
 
     seedsTiled;
 
+    //Variaveis de confirmação
+
     isTouching = false;
     regador =false;
     abobora =false;
     beringela =false;
     pepino =false;
 
+    // Conferindo se cada semente foi plantada
     aboboraPlantando =false;
     beringelaPlatando =false;
     pepinoPlantando =false;
-       
+
+    //Conferindo se ja esta pronto para colher
+    colher = false;
+    
     constructor(){
         super('SceneFarm');
     }
@@ -122,7 +128,6 @@ export default class SceneFarm extends Scene{
 
         for ( let i = 0; i <objects.length; i++){
             const obj = objects[i]
-            //console.log(obj);
 
             const prop = this.map.objects[0].objects[i]
             
@@ -153,7 +158,7 @@ export default class SceneFarm extends Scene{
 
             if(name.endsWith('Collision') ) {
                 this.layers[name].setCollisionByProperty({collide: true});
-                console.log(name)
+                
 
                 /* if ( CONFIG.DEBUG_COLLISION ) {
                     const debugGraphics = this.add.graphics().setAlpha(0.75).setDepth(i);
@@ -198,7 +203,6 @@ export default class SceneFarm extends Scene{
         
         const { space } = this.cursors;  
         if(space.isDown && objects.name =='doorHouse' && this.isTouching == false){
-            this.isTouching = true;
             console.log('abril a porta')
             this.scene.switch('SceneHouse');
         }
@@ -247,6 +251,7 @@ export default class SceneFarm extends Scene{
             .setDepth(0)
             aboboraSprite.setFrame(752);
             this.aboboraPlantando = true;
+            this.player.play('idle-space')
             console.log('plantando abobora')
 
         }
@@ -256,6 +261,7 @@ export default class SceneFarm extends Scene{
             const beringelaSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
             beringelaSprite.setFrame(656)
             this.beringelaPlatando = true;
+            this.player.play('idle-space')
             console.log('plantando beringela')
         }
 
@@ -264,6 +270,7 @@ export default class SceneFarm extends Scene{
             const pepinoSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
             pepinoSprite.setFrame(872)
             this.pepinoPlantando = true;
+            this.player.play('idle-space')
             console.log('plantando pepino')
         }
 
@@ -274,25 +281,27 @@ export default class SceneFarm extends Scene{
         if(space.isDown && objects.name =='seeds' && this.aboboraPlantando== true && this.regador ==true){
             const aboboraSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
             .setDepth(0) 
-            
             let frame = 753;
+            this.regador = false;
+            this.aboboraPlantando = false;
 
             function tempoDeCrescimento() {
                 aboboraSprite.setFrame(frame);
                 frame++;
-
                 if (frame <= 755) {
                     setTimeout(tempoDeCrescimento, 2000); // Agendar o próximo ciclo após 2 segundos (2000 ms)
-                }
+                    
+                }    
+                
             }
-
             tempoDeCrescimento();
+
                 
         }
 
         if(space.isDown && objects.name =='seeds' && this.beringelaPlatando== true && this.regador ==true){
             const beringelaSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
-            .setDepth(0) 
+            .setDepth(0)
             let frame = 656;
 
             function tempoDeCrescimento() {
@@ -313,6 +322,7 @@ export default class SceneFarm extends Scene{
         if(space.isDown && objects.name =='seeds' && this.pepinoPlantando== true && this.regador ==true){
             const pepinoSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
             .setDepth(0) 
+            
             let frame = 872;
 
             function tempoDeCrescimento() {
