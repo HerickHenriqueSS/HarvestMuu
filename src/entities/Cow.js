@@ -15,7 +15,6 @@ export default class Cow extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this); // Criando o Body da Fisica
 
         this.init();
-        this.initCow();
     }
 
     init() {
@@ -32,6 +31,46 @@ export default class Cow extends Phaser.Physics.Arcade.Sprite {
         this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
 
         this.play('stoped')
+
+        setInterval(() => {
+        
+            var randomNumber = Math.floor(Math.random()*4)
+            if( randomNumber == 0){
+                this.setVelocityX(7);
+                this.setVelocityY(0);
+                this.play('walk')
+                this.flipX = false;
+                
+            }
+            if( randomNumber == 1){
+                this.setVelocityX(-7); 
+                this.setVelocityY(0);
+                this.play('walk')
+                this.flipX = true;
+                
+            }
+            if( randomNumber == 2){
+                this.setVelocityX(0);
+                this.setVelocityY(7);
+                this.play('walk')
+                
+            }
+            if( randomNumber == 3){
+                this.setVelocityX(0);
+                this.setVelocityY(-7);
+                this.play('walk')
+                
+            }
+            
+        }, 4000);
+    
+    
+        setInterval(() => {
+            if(this.body.velocity.x == 0 && this.body.velocity.y == 0){
+                this.play('stoped')
+                
+            }
+        }, 1000)
               
         
         
@@ -64,50 +103,7 @@ export default class Cow extends Phaser.Physics.Arcade.Sprite {
         
     }
 
-    initCow(){
-        setInterval(() => {
-        
-            var randomNumber = Math.floor(Math.random()*4)
-            if( randomNumber == 0){
-                this.setVelocityX(7);
-                this.setVelocityY(0);
-                this.play('walk')
-                this.flipX = false;
-                
-            } else{
-                if( randomNumber == 1){
-                    this.setVelocityX(-7); 
-                    this.setVelocityY(0);
-                    this.play('walk')
-                    this.flipX = true;
-                    
-                }else{
-                    if( randomNumber == 2){
-                        this.setVelocityX(0);
-                        this.setVelocityY(7);
-                        this.play('walk')
-                        
-                    }else{
-                        if( randomNumber == 3){
-                            this.setVelocityX(0);
-                            this.setVelocityY(-7);
-                            this.play('walk')
-                            
-                        }
-                    }
-                }
-            }
-            
-        }, 4000);
     
-    
-        setInterval(() => {
-            if(this.body.velocity.x == 0 && this.body.velocity.y == 0){
-                this.play('stoped')
-                
-            }
-        }, 1000)
-    }
 
     
 }

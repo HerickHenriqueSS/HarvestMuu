@@ -5,6 +5,17 @@ import Player from '../entities/Player';
 import Cow from '../entities/Cow';
 
 export default class SceneHouse extends Scene{
+    /** @type {Phaser.Tilemaps.Tilemap} */
+    map;
+
+    layers = {};
+
+    /** @type {Phaser} */
+    player;
+    touch;
+
+    //** @type {Phaser.Physics.Arcade.Group} */
+    groupObjects;
 
     constructor(){
         super('SceneHouse');
@@ -29,7 +40,7 @@ export default class SceneHouse extends Scene{
 
         this.createMap();
         this.createPlayer();
-        /* this.createCow(); */
+        // this.createCow();
         this.createLayers();
         this.createColliders();
         this.createCamera();
@@ -48,7 +59,7 @@ export default class SceneHouse extends Scene{
 
     }
     createCow(){
-        this.cow =  new Cow(this, 300, 220, this.touch);
+        this.cow =  new Cow(this, 270, 200, this.touch);
         this.cow.setDepth(3)
 
     }
@@ -67,7 +78,7 @@ export default class SceneHouse extends Scene{
 
     createLayers() {
         //pegando os tilessets (usar os nomes )
-        const tilesFarm = this.map.getTileset('geral');
+        const tilesHouse = this.map.getTileset('geral');
 
         const layerNames = this.map.getTileLayerNames();
         console.log(layerNames)
@@ -75,8 +86,8 @@ export default class SceneHouse extends Scene{
             const name = layerNames[i];
             
 
-            // this.map.createLayer(name, [tilesFarm], 0, 0);           
-            this.layers[name] = this.map.createLayer(name, [tilesFarm], 0, 0);
+            // this.map.createLayer(name, [tilesHouse], 0, 0);           
+            this.layers[name] = this.map.createLayer(name, [tilesHouse], 0, 0);
             //definindo a profundidade de cada camada
             this.layers[name].setDepth(i);
 
@@ -109,8 +120,8 @@ export default class SceneHouse extends Scene{
 
             if (name.endsWith('Collision')) {
                 this.physics.add.collider(this.player, this.layers[name]);
-                this.physics.add.collider(this.cow, this.layers[name]);
-                this.physics.add.collider(this.cowTwo, this.layers[name]);
+                // this.physics.add.collider(this.cow, this.layers[name]);
+                // this.physics.add.collider(this.cowTwo, this.layers[name]);
             }
         }
 

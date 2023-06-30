@@ -200,8 +200,7 @@ export default class SceneFarm extends Scene{
         if(space.isDown && objects.name =='doorHouse' && this.isTouching == false){
             this.isTouching = true;
             console.log('abril a porta')
-            this.scene.start('SceneHouse');
-            
+            this.scene.switch('SceneHouse');
         }
 
         // Pegando os objetos

@@ -14,7 +14,7 @@ const config = {
       gravity: {
         y: 0
       },
-      debug: false
+      debug: true
     }
   },
   pixelArt: true,
