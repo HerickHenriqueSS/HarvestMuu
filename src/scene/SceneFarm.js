@@ -3,6 +3,7 @@ import { CONFIG } from "../config"
 import Player from "../entities/Player";
 import Touch from "../entities/Touch";
 import Cow from "../entities/Cow";
+import CowTwo from "../entities/CowTwo";
 
 export default class SceneFarm extends Scene{
 
@@ -17,8 +18,10 @@ export default class SceneFarm extends Scene{
 
     //** @type {Phaser.Physics.Arcade.Group} */
     groupObjects;
+    objects;
 
     seedsTiled;
+       
 
     //Variaveis de confirmação
 
@@ -28,13 +31,24 @@ export default class SceneFarm extends Scene{
     beringela =false;
     pepino =false;
 
+
+    //Variaveis de sprite
+
+    aboboraSprite;
+    beringelaSprite;
+    pepinoSprite;
+
     // Conferindo se cada semente foi plantada
     aboboraPlantando =false;
     beringelaPlatando =false;
     pepinoPlantando =false;
 
     //Conferindo se ja esta pronto para colher
+    stateTreeMaca =0;
+    stateTreeLaranja =0;
+    statePlant = 0;
     colher = false;
+    money = 0;
     
     constructor(){
         super('SceneFarm');
@@ -61,6 +75,19 @@ export default class SceneFarm extends Scene{
             frameWidth: CONFIG.TILE_SIZE,
             frameHeight: CONFIG.TILE_SIZE 
         });
+
+        this.load.spritesheet('arvore_laranja', 'assets/mapas/arvore_laranjas_anim.png', {
+            frameWidth: CONFIG.TILE_SIZE*3,
+            frameHeight: CONFIG.TILE_SIZE*3 
+        });
+        this.load.spritesheet('arvore_maca', 'assets/mapas/arvore_macas_anim.png', {
+            frameWidth: CONFIG.TILE_SIZE*3,
+            frameHeight: CONFIG.TILE_SIZE*3 
+        });
+        this.load.spritesheet('arvore', 'assets/mapas/arvore_anim.png', {
+            frameWidth: CONFIG.TILE_SIZE*3,
+            frameHeight: CONFIG.TILE_SIZE*3 
+        });
         
     }
     
@@ -76,12 +103,13 @@ export default class SceneFarm extends Scene{
         this.createObjects();
         this.createColliders();    
         this.createCamera();
+        this.openHouse();
         this.handleTouch();
+        this.coleteTree()
     }
         
     
     update(){
-        
         
     }
 
@@ -98,7 +126,7 @@ export default class SceneFarm extends Scene{
 
     }
     createCowTwo(){
-        this.cowTwo =  new Cow(this, 220, 120, this.touch);
+        this.cowTwo =  new CowTwo(this, 220, 120, this.touch);
         this.cowTwo.setDepth(3)
 
     }
@@ -120,8 +148,7 @@ export default class SceneFarm extends Scene{
         this.groupObjects =this.physics.add.group();
 
         const objects = this.map.createFromObjects('Objects','Objects',{
-            nome: 'seeds', nome: 'doorHouse', nome: 'regador',nome: 'beringela', nome: 'pepino', nome: 'abobora'
-        
+            nome: 'seeds', nome: 'doorHouse', nome: 'regador',nome: 'beringela', nome: 'pepino', nome: 'abobora', nome: 'coracao', nome: 'laranja'
         });
         
         this.physics.world.enable(objects);
@@ -189,6 +216,8 @@ export default class SceneFarm extends Scene{
         }
 
         this.physics.add.overlap(this.touch, this.groupObjects, this.handleTouch, undefined, this);
+        this.physics.add.overlap(this.touch, this.groupObjects, this.openHouse, undefined, this);
+        this.physics.add.overlap(this.touch, this.groupObjects, this.coleteTree, undefined, this);
     }
 
     createCamera(){
@@ -199,14 +228,15 @@ export default class SceneFarm extends Scene{
         this.cameras.main.startFollow(this.player)
     }
 
-    handleTouch(touch, objects){      
-        
+    openHouse(touch, objects){ 
         const { space } = this.cursors;  
         if(space.isDown && objects.name =='doorHouse' && this.isTouching == false){
-            console.log('abril a porta')
             this.scene.switch('SceneHouse');
         }
+    }
 
+    handleTouch(touch, objects){      
+        const { space } = this.cursors;  
         // Pegando os objetos
 
         if(space.isDown && objects.name =='regador' && this.regador== false){
@@ -252,6 +282,7 @@ export default class SceneFarm extends Scene{
             aboboraSprite.setFrame(752);
             this.aboboraPlantando = true;
             this.player.play('idle-space')
+            this.statePlant = 0;
             console.log('plantando abobora')
 
         }
@@ -262,7 +293,9 @@ export default class SceneFarm extends Scene{
             beringelaSprite.setFrame(656)
             this.beringelaPlatando = true;
             this.player.play('idle-space')
+            this.statePlant = 0;
             console.log('plantando beringela')
+            
         }
 
 
@@ -271,79 +304,198 @@ export default class SceneFarm extends Scene{
             pepinoSprite.setFrame(872)
             this.pepinoPlantando = true;
             this.player.play('idle-space')
+            this.statePlant = 0;
             console.log('plantando pepino')
         }
 
 
 
-        //Regando as plantas
+        ////Estados da semeente de Abobora
 
-        if(space.isDown && objects.name =='seeds' && this.aboboraPlantando== true && this.regador ==true){
+        if(space.isDown && objects.name =='seeds' && this.aboboraPlantando== true && this.regador ==true && this.statePlant == 0){
             const aboboraSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            aboboraSprite.setFrame(752)
             .setDepth(0) 
-            let frame = 753;
+            setTimeout(()=> {
+                aboboraSprite.setFrame(753);
+                this.statePlant = 1
+            }, 3000)
             this.regador = false;
-            this.aboboraPlantando = false;
-
-            function tempoDeCrescimento() {
-                aboboraSprite.setFrame(frame);
-                frame++;
-                if (frame <= 755) {
-                    setTimeout(tempoDeCrescimento, 2000); // Agendar o próximo ciclo após 2 segundos (2000 ms)
-                    
-                }    
-                
-            }
-            tempoDeCrescimento();
-
-                
         }
-
-        if(space.isDown && objects.name =='seeds' && this.beringelaPlatando== true && this.regador ==true){
-            const beringelaSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
-            .setDepth(0)
-            let frame = 656;
-
-            function tempoDeCrescimento() {
-                beringelaSprite.setFrame(frame);
-                frame++;
-
-                if (frame <= 659) {
-                    setTimeout(tempoDeCrescimento, 2000); // Agendar o próximo ciclo após 2 segundos (2000 ms)
-                }
-            }
-
-            tempoDeCrescimento();
-             
-            
-            
-        }
-
-        if(space.isDown && objects.name =='seeds' && this.pepinoPlantando== true && this.regador ==true){
-            const pepinoSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+        if(space.isDown && objects.name =='seeds' && this.aboboraPlantando== true && this.regador ==true && this.statePlant == 1){
+            const aboboraSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            aboboraSprite.setFrame(753)
             .setDepth(0) 
-            
-            let frame = 872;
+            setTimeout(()=> {
+                aboboraSprite.setFrame(754);
+                this.statePlant = 2
+            }, 3000)
+            this.regador = false;
+        }
+        if(space.isDown && objects.name =='seeds' && this.aboboraPlantando== true && this.regador ==true && this.statePlant == 2){
+            const aboboraSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            aboboraSprite.setFrame(754)
+            .setDepth(0) 
+            setTimeout(()=> {
+                aboboraSprite.setFrame(755);
+                this.statePlant = 3
+            }, 3000)
+            this.regador = false;
+            this.colher =true
+        }
 
-            function tempoDeCrescimento() {
-                pepinoSprite.setFrame(frame);
-                frame++;
+        if(space.isDown && objects.name =='seeds' && this.aboboraPlantando== true && this.statePlant== 3){
+            console.log('colheu')
+            const aboboraSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            aboboraSprite.setFrame(11)
+            this.statePlant = 0
+            this.aboboraPlantando= false
+            this.colher = false;
+        }
 
-                if (frame <= 875) {
-                    setTimeout(tempoDeCrescimento, 2000); // Agendar o próximo ciclo após 2 segundos (2000 ms)
-                }
-            }
 
-            tempoDeCrescimento();
-             
-            
-            
+
+        //Estados da semeente de Beringela
+
+
+        if(space.isDown && objects.name =='seeds' && this.beringelaPlatando== true && this.regador ==true && this.statePlant == 0){
+            const beringelaSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            beringelaSprite.setFrame(656)
+            .setDepth(0)
+            setTimeout(()=> {
+                beringelaSprite.setFrame(657);
+                this.statePlant = 1
+            }, 3000)
+            this.regador = false;   
+        }
+        if(space.isDown && objects.name =='seeds' && this.beringelaPlatando== true && this.regador ==true && this.statePlant == 1){
+            const beringelaSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            beringelaSprite.setFrame(657)
+            .setDepth(0)
+            setTimeout(()=> {
+                beringelaSprite.setFrame(658);
+                this.statePlant = 2
+            }, 3000)
+            this.regador = false;   
+        }
+        if(space.isDown && objects.name =='seeds' && this.beringelaPlatando== true && this.regador ==true && this.statePlant == 2){
+            const beringelaSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            beringelaSprite.setFrame(658)
+            .setDepth(0)
+            setTimeout(()=> {
+                beringelaSprite.setFrame(659);
+                this.statePlant = 3
+            }, 3000)
+            this.regador = false;   
+            this.colher =true
+        }
+        if(space.isDown && objects.name =='seeds' && this.beringelaPlatando== true && this.statePlant== 3){
+            console.log('colheu')
+            const beringelaSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            beringelaSprite.setFrame(11)
+            this.statePlant = 0
+            this.beringelaPlatando= false
+            this.colher = false;
+        }
+
+
+
+        //Estados da semeente de Pepino
+
+        if(space.isDown && objects.name =='seeds' && this.pepinoPlantando== true && this.regador ==true && this.statePlant == 0){
+            const pepinoSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            pepinoSprite.setFrame(872)
+            .setDepth(0)
+            setTimeout(()=> {
+                pepinoSprite.setFrame(873);
+                this.statePlant = 1
+            }, 3000)
+            this.regador = false;
+        }
+        if(space.isDown && objects.name =='seeds' && this.pepinoPlantando== true && this.regador ==true && this.statePlant == 1){
+            const pepinoSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            pepinoSprite.setFrame(873)
+            .setDepth(0)
+            setTimeout(()=> {
+                pepinoSprite.setFrame(874);
+                this.statePlant = 2
+            }, 3000)
+            this.regador = false;
+        }
+        if(space.isDown && objects.name =='seeds' && this.pepinoPlantando== true && this.regador ==true && this.statePlant == 2){
+            const pepinoSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            pepinoSprite.setFrame(874)
+            .setDepth(0)
+            setTimeout(()=> {
+                pepinoSprite.setFrame(875);
+                this.statePlant = 3
+            }, 3000)
+            this.regador = false;
+            this.colher =true
+        }
+
+        if(space.isDown && objects.name =='seeds' && this.pepinoPlantando== true && this.statePlant== 3){
+            console.log('colheu')
+            const pepinoSprite = this.physics.add.sprite(objects.x, objects.y, 'geral_sprite')
+            pepinoSprite.setFrame(11)
+            this.statePlant = 0
+            this.pepinoPlantando= false
+            this.colher = false;
         }
 
     }
 
+
+    coleteTree(touch, objects){
+        const { space } = this.cursors;
     
+        if(space.isDown && objects.name === 'coracao' && this.stateTreeMaca === 0){
+            const arvoreMaca = this.physics.add.sprite(/* 320, 90 */objects.x,objects.y-12, 'arvore_maca')
+            let frameMaca = 35
+            setTimeout(()=>{
+                function arvoreMacaTime() {
+                    arvoreMaca.setFrame(frameMaca);
+                    frameMaca++;
+                    if (frameMaca <= 47) {
+                        setTimeout(arvoreMacaTime, 50);
+                    }    
+                }
+                arvoreMacaTime();
+            },1000);
+
+
+            // arvoreMaca.destroy()
+            // arvoreMaca = this.physics.add.sprite(320, 90, 'arvore')
+            // arvoreMaca.setFrame(1)
+        }
     
+        if(space.isDown && objects.name === 'laranja' && this.stateTreeLaranja === 0){
+            const arvorelaranja = this.physics.add.sprite(288, 27, 'arvore_laranja' )
+            let frameLaranja = 35
+            setTimeout(()=>{
+                function arvorelaranjaTime() {
+                    arvorelaranja.setFrame(frameLaranja);
+                    frameLaranja++;
+                    if (frameLaranja <= 47) {
+                        setTimeout(arvorelaranjaTime, 50);
+                    }
+                }
+                arvorelaranjaTime()
+            },1000);
+            this.stateTreeLaranja = 1;
+
+        } 
+         
+        
+        if(space.isDown && objects.name === 'laranja' && this.stateTreeLaranja === 1){
+            const arvorelaranja = this.physics.add.sprite(288, 27, 'arvore' )
+            arvorelaranja.setFrame(1)
+        }
+        
+
+        
+        
+    }
     
 }
 

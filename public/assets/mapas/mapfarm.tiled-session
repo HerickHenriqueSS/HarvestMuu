@@ -3,10 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "farmMap2.json",
     "expandedProjectPaths": [
         "."
     ],
+    "file.lastUsedOpenFilter": "Todos os Ficheiros (*)",
     "fileStates": {
         "": {
             "scaleInDock": 1,
@@ -75,11 +76,11 @@
             "expandedObjectLayers": [
                 8
             ],
-            "scale": 0.75,
-            "selectedLayer": 0,
+            "scale": 3,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 195.33333333333337,
-                "y": 245.33333333333326
+                "x": 359.8333333333333,
+                "y": 162.49999999999997
             }
         },
         "farmMap.json#geral": {
@@ -90,8 +91,8 @@
             "scale": 1.4629999999999999,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240.25974025974034,
-                "y": 198.2228298017772
+                "x": 239.5762132604238,
+                "y": 200.61517429938488
             }
         },
         "farmMap.tmx#geral": {
@@ -101,8 +102,8 @@
             "scale": 2.0801041666666666,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.17071460764183,
-                "y": 199.02849416595723
+                "x": 239.65145976263204,
+                "y": 199.7496118984426
             }
         },
         "farmMap2.json#geral": {
@@ -131,7 +132,7 @@
             "scaleInDock": 1
         }
     },
-    "last.exportedFilePath": "D:/Jogos Digitais/HarvestMuu/public/assets/mapas",
+    "last.exportedFilePath": "C:/Users/heric/OneDrive/Área de Trabalho/HarvestMuu2/public/assets/mapas",
     "last.imagePath": "D:/Jogos Digitais/HarvestMuu/public/assets/tiles/fazenda",
     "map.height": 25,
     "map.lastUsedExportFilter": "Ficheiros de mapa JSON (*.tmj *.json)",
@@ -139,17 +140,20 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
+        "farmMap.json",
+        "farmMap.tmx",
+        "farmMap2.json"
     ],
     "project": "mapfarm.tiled-project",
     "property.type": "bool",
     "recentFiles": [
         "farmMap.json",
         "farmMap2.json",
+        "farmMap.tmx",
         "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/Sala-de-Aula.tmx",
         "D:/Jogos Digitais/Project-class-game/public/mapas/tiles/mapas.tmx",
         "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/Sala-de-Aula.tmx",
         "D:/Jogos Digitais/Project-class-game code note/public/mapas/tiles/mapas.tmx",
-        "farmMap.tmx",
         "houseMap2.json",
         "houseMap.json"
     ],

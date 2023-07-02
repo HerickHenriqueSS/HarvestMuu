@@ -1,7 +1,7 @@
 import { CONFIG } from "../config";
 import SceneFarm from "../scene/SceneFarm";
 
-export default class Cow extends Phaser.Physics.Arcade.Sprite {
+export default class CowTwo extends Phaser.Physics.Arcade.Sprite {
     /** @type {Phaser.Type.Input.Keyboard.CursorKeys} */
 
     cursors;
@@ -9,7 +9,7 @@ export default class Cow extends Phaser.Physics.Arcade.Sprite {
     isAction = false;   // Diz se a tecla espaço( de ação ) esta precionada
 
     constructor(scene, x, y, touch){
-        super(scene, x, y, 'cow')
+        super(scene, x, y, 'cowTwo')
 
         scene.add.existing(this);         // Criando a imagem que o jogador ve
         scene.physics.add.existing(this); // Criando o Body da Fisica
@@ -86,7 +86,7 @@ export default class Cow extends Phaser.Physics.Arcade.Sprite {
         this.anims.create({
             key: 'stoped',
             frames: this.anims.generateFrameNumbers('cow', {
-            start: 18, end: 19}),
+            start: 82, end: 83}),
             frameRate: this.frameRate,
             repeat: 0
         });
@@ -96,7 +96,7 @@ export default class Cow extends Phaser.Physics.Arcade.Sprite {
         this.anims.create({
             key: 'walk',
             frames: this.anims.generateFrameNumbers('cow', {
-            start: 10, end: 16}),
+            start: 72, end: 79}),
             frameRate: this.frameRate,
             repeat: -1
         });
