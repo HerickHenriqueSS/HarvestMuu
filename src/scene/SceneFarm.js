@@ -319,7 +319,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 aboboraSprite.setFrame(753);
                 this.statePlant = 1
-            }, 3000)
+            }, 60000)
             this.regador = false;
         }
         if(space.isDown && objects.name =='seeds' && this.aboboraPlantando== true && this.regador ==true && this.statePlant == 1){
@@ -329,7 +329,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 aboboraSprite.setFrame(754);
                 this.statePlant = 2
-            }, 3000)
+            }, 60000)
             this.regador = false;
         }
         if(space.isDown && objects.name =='seeds' && this.aboboraPlantando== true && this.regador ==true && this.statePlant == 2){
@@ -339,7 +339,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 aboboraSprite.setFrame(755);
                 this.statePlant = 3
-            }, 3000)
+            }, 60000)
             this.regador = false;
             this.colher =true
         }
@@ -365,7 +365,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 beringelaSprite.setFrame(657);
                 this.statePlant = 1
-            }, 3000)
+            }, 60000)
             this.regador = false;   
         }
         if(space.isDown && objects.name =='seeds' && this.beringelaPlatando== true && this.regador ==true && this.statePlant == 1){
@@ -375,7 +375,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 beringelaSprite.setFrame(658);
                 this.statePlant = 2
-            }, 3000)
+            }, 60000)
             this.regador = false;   
         }
         if(space.isDown && objects.name =='seeds' && this.beringelaPlatando== true && this.regador ==true && this.statePlant == 2){
@@ -385,7 +385,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 beringelaSprite.setFrame(659);
                 this.statePlant = 3
-            }, 3000)
+            }, 60000)
             this.regador = false;   
             this.colher =true
         }
@@ -409,7 +409,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 pepinoSprite.setFrame(873);
                 this.statePlant = 1
-            }, 3000)
+            }, 60000)
             this.regador = false;
         }
         if(space.isDown && objects.name =='seeds' && this.pepinoPlantando== true && this.regador ==true && this.statePlant == 1){
@@ -419,7 +419,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 pepinoSprite.setFrame(874);
                 this.statePlant = 2
-            }, 3000)
+            }, 60000)
             this.regador = false;
         }
         if(space.isDown && objects.name =='seeds' && this.pepinoPlantando== true && this.regador ==true && this.statePlant == 2){
@@ -429,7 +429,7 @@ export default class SceneFarm extends Scene{
             setTimeout(()=> {
                 pepinoSprite.setFrame(875);
                 this.statePlant = 3
-            }, 3000)
+            }, 60000)
             this.regador = false;
             this.colher =true
         }
@@ -461,7 +461,7 @@ export default class SceneFarm extends Scene{
                     }    
                 }
                 arvoreMacaTime();
-            },1000);
+            },60000);
 
 
             // arvoreMaca.destroy()
@@ -481,7 +481,7 @@ export default class SceneFarm extends Scene{
                     }
                 }
                 arvorelaranjaTime()
-            },1000);
+            },60000);
             this.stateTreeLaranja = 1;
 
         } 
